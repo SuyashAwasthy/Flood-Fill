@@ -1,5 +1,4 @@
 #include<iostream>
-
 #include<vector>
 
 using namespace std;
@@ -10,30 +9,31 @@ void floodfill(vector<vector<int>> maze,int row,int col,string psf,vector<vector
        maze[row][col]==1 || visited[row][col]==true) 
             return;
        
-    if(row==maze.size()-1 && col==maze[0].size()-1)
-    {
-        cout<<psf<<endl;
+    if(row==maze.size()-1 && col==maze[0].size()-1){
+        cout<<"Possible path: "<<psf<<endl;
         return;
     }
     
     visited[row][col] = true;
-    floodfill(maze,row-1,col,psf+"t",visited);
-    floodfill(maze,row,col-1,psf+"l",visited);
-    floodfill(maze,row+1,col,psf+"d",visited);
-    floodfill(maze,row,col+1,psf+"r",visited);
+    floodfill(maze,row-1,col,psf+"↑",visited);
+    floodfill(maze,row,col-1,psf+"←",visited);
+    floodfill(maze,row+1,col,psf+"↓",visited);
+    floodfill(maze,row,col+1,psf+"→",visited);
     visited[row][col] = false;
 
 }
 
 int main() {
     int n, m;
-    cin >> n >> m;
+    cout<<"Enter number of rows in the floodfill: ";
+    cin >> n;
+    cout<<"Enter number of columns in the floodfill: ";
+    cin >> m;
     vector<vector<int>>arr(n,vector<int>(m));
-
+    cout<<"Enter floodfill elements--- 0 if empty, 1 if obstacle:\n";
     for (int i = 0; i < n; i++)
         for (int j = 0; j < m; j++)
             cin >> arr[i][j];
     vector<vector<bool>>visited(n,vector<bool>(m));
     floodfill(arr,0,0,"",visited);
 }
-
